@@ -37,7 +37,7 @@ export function Hero({ navigate }: HeroProps) {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'blur(2px)' }}
         >
-          <source src="/src/assets/WhatsApp Video 2025-11-20 at 17.06.20.mp4" type="video/mp4" />
+          <source src="/hero-video.mp4" type="video/mp4" />
         </video>
       </div>
 
