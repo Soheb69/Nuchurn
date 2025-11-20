@@ -162,29 +162,31 @@ export function Navigation({ currentPage, navigate }: NavigationProps) {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="md:hidden overflow-hidden bg-[#2C2C2C] border-t border-[#D4AF37]/30"
           >
-            <div className="container mx-auto px-6 py-4 flex flex-col">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.page}
-                  onClick={() => handleNavigate(item.page, item.path)}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 * index, duration: 0.3 }}
-                  className={`relative text-left py-4 text-base tracking-widest transition-colors border-b border-[#D4AF37]/20 last:border-b-0 ${
-                    currentPage === item.page
-                      ? "text-[#D4AF37]"
-                      : "text-[#F5F3ED] hover:text-[#D4AF37]"
-                  }`}
-                >
-                  {item.label}
-                  {currentPage === item.page && (
-                    <motion.span
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-[#D4AF37] rounded-r"
-                      layoutId="mobile-active-indicator"
-                    />
-                  )}
-                </motion.button>
-              ))}
+            <div className="container mx-auto px-6 py-6">
+              <div className="flex flex-col gap-2">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.page}
+                    onClick={() => handleNavigate(item.page, item.path)}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 * index, duration: 0.3 }}
+                    className={`relative text-left py-5 px-4 text-lg tracking-widest transition-colors border-b border-[#D4AF37]/20 last:border-b-0 ${
+                      currentPage === item.page
+                        ? "text-[#D4AF37]"
+                        : "text-[#F5F3ED] hover:text-[#D4AF37]"
+                    }`}
+                  >
+                    {item.label}
+                    {currentPage === item.page && (
+                      <motion.span
+                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-[#D4AF37] rounded-r"
+                        layoutId="mobile-active-indicator"
+                      />
+                    )}
+                  </motion.button>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
