@@ -211,18 +211,11 @@ export function ProductCard({ product, index }: ProductCardProps) {
           {product.name}
         </motion.h3>
         
-        <motion.p 
+        <motion.p
           className="text-[#F5F3ED]/70 text-sm italic"
           animate={{ opacity: isHovered ? 1 : 0.7 }}
         >
           {product.textureProfile}
-        </motion.p>
-        
-        <motion.p 
-          className="text-[#D4AF37]/80 text-xs tracking-wider uppercase"
-          animate={{ opacity: isHovered ? 1 : 0.8 }}
-        >
-          {product.origin}
         </motion.p>
       </motion.div>
     </motion.div>

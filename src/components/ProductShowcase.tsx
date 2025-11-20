@@ -1,9 +1,9 @@
 import { motion } from "motion/react";
 import { ProductCard } from "./ProductCard";
-import apricotHeroImage1 from "figma:asset/f16b027da416b10eb144b1a68d114f8fcd4f5d24.png";
+import apricotHeroImage1 from "../assets/WhatsApp Image 2025-11-20 at 17.34.09.jpeg";
 import apricotHeroImage2 from "figma:asset/a8a5d753ab721d1940582464ca73116c33969208.png";
 import dateHeroImage1 from "figma:asset/6478403cbebd65ed5cb7655c92aa1dc9c81e762a.png";
-import dateHeroImage2 from "figma:asset/4263f4a0e6f73ddd21732a27992964b9792695ba.png";
+import dateHeroImage2 from "../assets/WhatsApp Image 2025-11-20 at 17.32.44.jpeg";
 import figImage from "figma:asset/c595e38072d0b646d3759268cc1dd6c01e9afac0.png";
 import saffronImage from "figma:asset/0871aff281baf0fee8559791d157f1063847a287.png";
 import walnutImage from "figma:asset/59452653807e99ff713ab4d99449394f18ec2306.png";
@@ -61,6 +61,15 @@ export function ProductShowcase() {
       origin: "Walnuts sourced from Californian orchards",
       imageUrls: [walnutImage],
       alt: "NuChurn Walnut artisanal ice cream with maple swirl",
+      comingSoon: true
+    },
+    {
+      id: "6",
+      name: "Pecan",
+      textureProfile: "Roasted pecan with honey drizzle",
+      origin: "Pistachios sourced from Mediterranean groves",
+      imageUrls: ["/new-product.jpeg"],
+      alt: "NuChurn Pistachio artisanal ice cream",
       comingSoon: true
     }
   ];

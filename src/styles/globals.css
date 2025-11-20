@@ -135,6 +135,18 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
   }
 }
 
@@ -196,6 +208,12 @@
 html {
   font-size: var(--font-size);
   scroll-behavior: smooth;
+}
+
+#root {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* Custom scrollbar for webkit browsers */
