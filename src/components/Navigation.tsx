@@ -10,6 +10,7 @@ interface NavigationProps {
 export function Navigation({ currentPage, navigate }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,10 +21,12 @@ export function Navigation({ currentPage, navigate }: NavigationProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when window is resized to desktop
+  // Track window size and close mobile menu when resized to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -70,84 +73,88 @@ export function Navigation({ currentPage, navigate }: NavigationProps) {
     >
       <div className="container mx-auto px-6 py-6">
         {/* Mobile Layout */}
-        <div className="flex md:hidden items-center justify-between">
-          {/* Logo */}
-          <motion.button
-            onClick={() => handleNavigate("home", "/")}
-            className="tracking-wider text-[#F5F3ED] hover:text-[#D4AF37] transition-colors cursor-pointer relative group"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            NüChurn
-            <motion.span
-              className="absolute -bottom-1 left-0 h-[2px] bg-[#D4AF37]"
-              initial={{ width: 0 }}
-              whileHover={{ width: "100%" }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.button>
+        {isMobile && (
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <motion.button
+              onClick={() => handleNavigate("home", "/")}
+              className="tracking-wider text-[#F5F3ED] hover:text-[#D4AF37] transition-colors cursor-pointer relative group"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              NüChurn
+              <motion.span
+                className="absolute -bottom-1 left-0 h-[2px] bg-[#D4AF37]"
+                initial={{ width: 0 }}
+                whileHover={{ width: "100%" }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-[#F5F3ED] hover:text-[#D4AF37] transition-colors"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </motion.button>
-        </div>
+            {/* Mobile Menu Button */}
+            <motion.button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-[#F5F3ED] hover:text-[#D4AF37] transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </motion.button>
+          </div>
+        )}
 
         {/* Desktop Layout */}
-        <div className="hidden md:flex items-center justify-center gap-12">
-          {/* Logo */}
-          <motion.button
-            onClick={() => navigate("home", "/")}
-            className="tracking-wider text-[#F5F3ED] hover:text-[#D4AF37] transition-colors cursor-pointer relative group"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            NüChurn
-            <motion.span
-              className="absolute -bottom-1 left-0 h-[2px] bg-[#D4AF37]"
-              initial={{ width: 0 }}
-              whileHover={{ width: "100%" }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.button>
+        {!isMobile && (
+          <div className="flex items-center justify-center gap-12">
+            {/* Logo */}
+            <motion.button
+              onClick={() => navigate("home", "/")}
+              className="tracking-wider text-[#F5F3ED] hover:text-[#D4AF37] transition-colors cursor-pointer relative group"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              NüChurn
+              <motion.span
+                className="absolute -bottom-1 left-0 h-[2px] bg-[#D4AF37]"
+                initial={{ width: 0 }}
+                whileHover={{ width: "100%" }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
 
-          {/* Desktop Navigation */}
-          <div className="flex items-center gap-8">
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item.page}
-                onClick={() => navigate(item.page, item.path)}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index, duration: 0.5 }}
-                className="relative text-sm text-[#F5F3ED] tracking-widest hover:text-[#D4AF37] transition-colors group"
-              >
-                {item.label}
-                <motion.span
-                  className="absolute -bottom-1 left-0 h-[1px] bg-[#D4AF37]"
-                  initial={{ width: 0 }}
-                  animate={{
-                    width: currentPage === item.page ? "100%" : 0
-                  }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-            ))}
+            {/* Desktop Navigation */}
+            <div className="flex items-center gap-8">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.page}
+                  onClick={() => navigate(item.page, item.path)}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.5 }}
+                  className="relative text-sm text-[#F5F3ED] tracking-widest hover:text-[#D4AF37] transition-colors group"
+                >
+                  {item.label}
+                  <motion.span
+                    className="absolute -bottom-1 left-0 h-[1px] bg-[#D4AF37]"
+                    initial={{ width: 0 }}
+                    animate={{
+                      width: currentPage === item.page ? "100%" : 0
+                    }}
+                    whileHover={{ width: "100%" }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Mobile Dropdown Menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobile && isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
