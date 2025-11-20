@@ -156,37 +156,34 @@ export function Navigation({ currentPage, navigate }: NavigationProps) {
       <AnimatePresence>
         {isMobile && isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden overflow-hidden bg-[#2C2C2C] border-t border-[#D4AF37]/30"
+            initial={{ opacity: 0, maxHeight: 0 }}
+            animate={{ opacity: 1, maxHeight: "500px" }}
+            exit={{ opacity: 0, maxHeight: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="w-full bg-[#2C2C2C] border-t-2 border-[#D4AF37]/40 overflow-hidden"
           >
-            <div className="container mx-auto px-6 py-6">
-              <div className="flex flex-col gap-2">
-                {navItems.map((item, index) => (
-                  <motion.button
-                    key={item.page}
-                    onClick={() => handleNavigate(item.page, item.path)}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 * index, duration: 0.3 }}
-                    className={`relative text-left py-5 px-4 text-lg tracking-widest transition-colors border-b border-[#D4AF37]/20 last:border-b-0 ${
-                      currentPage === item.page
-                        ? "text-[#D4AF37]"
-                        : "text-[#F5F3ED] hover:text-[#D4AF37]"
-                    }`}
-                  >
-                    {item.label}
+            <div className="px-6 py-4">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.page}
+                  onClick={() => handleNavigate(item.page, item.path)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.3 }}
+                  className={`w-full text-left py-4 px-4 mb-2 text-base tracking-widest transition-all rounded block ${
+                    currentPage === item.page
+                      ? "text-[#D4AF37] bg-[#D4AF37]/10"
+                      : "text-[#F5F3ED] hover:text-[#D4AF37] hover:bg-[#D4AF37]/5"
+                  }`}
+                >
+                  <div className="flex items-center">
                     {currentPage === item.page && (
-                      <motion.span
-                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-[#D4AF37] rounded-r"
-                        layoutId="mobile-active-indicator"
-                      />
+                      <span className="w-1 h-6 bg-[#D4AF37] rounded mr-3"></span>
                     )}
-                  </motion.button>
-                ))}
-              </div>
+                    <span>{item.label}</span>
+                  </div>
+                </motion.button>
+              ))}
             </div>
           </motion.div>
         )}
