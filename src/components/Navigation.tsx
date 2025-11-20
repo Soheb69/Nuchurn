@@ -69,7 +69,8 @@ export function Navigation({ currentPage, navigate }: NavigationProps) {
       }`}
     >
       <div className="container mx-auto px-6 py-6">
-        <div className="flex items-center justify-between md:justify-center">
+        {/* Mobile Layout */}
+        <div className="flex md:hidden items-center justify-between">
           {/* Logo */}
           <motion.button
             onClick={() => handleNavigate("home", "/")}
@@ -87,8 +88,38 @@ export function Navigation({ currentPage, navigate }: NavigationProps) {
             />
           </motion.button>
 
+          {/* Mobile Menu Button */}
+          <motion.button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-[#F5F3ED] hover:text-[#D4AF37] transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </motion.button>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden md:flex items-center justify-center gap-12">
+          {/* Logo */}
+          <motion.button
+            onClick={() => navigate("home", "/")}
+            className="tracking-wider text-[#F5F3ED] hover:text-[#D4AF37] transition-colors cursor-pointer relative group"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            NüChurn
+            <motion.span
+              className="absolute -bottom-1 left-0 h-[2px] bg-[#D4AF37]"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.button>
+
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 ml-12">
+          <div className="flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.page}
@@ -111,16 +142,6 @@ export function Navigation({ currentPage, navigate }: NavigationProps) {
               </motion.button>
             ))}
           </div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-[#F5F3ED] hover:text-[#D4AF37] transition-colors z-50"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </motion.button>
         </div>
       </div>
 
