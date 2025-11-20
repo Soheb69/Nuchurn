@@ -36,20 +36,11 @@ export function Hero({ navigate }: HeroProps) {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'blur(2px)' }}
-          poster="https://images.unsplash.com/photo-1662710070927-eae4d51e2f6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpc2FuYWwlMjBpY2UlMjBjcmVhbSUyMHN3aXJsfGVufDF8fHx8MTc2MzYyNjUyNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         >
-          {/* 
-            REPLACE THIS WITH YOUR SORA VIDEO URL
-            Steps to add your video:
-            1. Download the video from: https://sora.chatgpt.com/g/gen_01kag507efef6bryj1yb9vqe6z
-            2. Host the video file (upload to your server or use a CDN)
-            3. Replace the src below with your video URL
-            4. Or right-click the video on Sora and "Copy video address" to get direct URL
-          */}
-          <source src="YOUR_SORA_VIDEO_URL_HERE.mp4" type="video/mp4" />
+          <source src="/src/assets/WhatsApp Video 2025-11-20 at 17.06.20.mp4" type="video/mp4" />
         </video>
       </div>
-      
+
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/70 via-[#2C2C2C]/65 to-[#0a0a0a]/75" />
 
