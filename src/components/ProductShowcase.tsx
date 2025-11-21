@@ -22,8 +22,8 @@ export function ProductShowcase() {
   const products: Product[] = [
     {
       id: "1",
-      name: "Choco Crunch Date",
-      textureProfile: "Chewy Arabian dates meets the crunch of chocolate chip",
+      name: "Date Choco Chunk",
+      textureProfile: "Sweet Arabian dates meets the crunch of chocolate chip",
       origin: "Dates sourced from Persian palms",
       imageUrls: [dateHeroImage2, dateHeroImage1],
       alt: "NuChurn Arabian Date premium ice cream with roasted walnut pieces and chewy dates"
